@@ -11,28 +11,36 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Search Screen'),
       ),
       body: Column(
         children: [
-          TextField(
-            onChanged: (value) {
-              context.read<SearchBloc>().add(SearchWord(value));
-            },
+          Container(
+            margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+            child: TextField(
+              onChanged: (value) {
+                context.read<SearchBloc>().add(SearchWord(value));
+              },
+            ),
           ),
           BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
             if (state is LoadedState) {
-              return ListView.builder(
-                itemCount: state.searchResults.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(state.searchResults[index]),
-                  );
-                },
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: state.searchResults.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(state.searchResults[index]),
+                    );
+                  },
+                ),
               );
             } else {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return const Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               );
             }
           }),
