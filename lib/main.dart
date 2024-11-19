@@ -1,3 +1,4 @@
+import 'package:bloc_search/presentation/pages/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class BlocSearch extends StatelessWidget {
@@ -7,11 +8,11 @@ class BlocSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: "Bloc Search",
-      home: ,
+      home: SearchScreen(),
     );
   }
 }
-void main(){
+
+void main() {
   runApp(const BlocSearch());
 }
-
